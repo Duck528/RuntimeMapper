@@ -12,6 +12,7 @@
 		FC74B79D2108C97900F9CA78 /* RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */; };
 		FC74B7A22108C97900F9CA78 /* RuntimeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */; };
 		FC74B7A42108C97900F9CA78 /* RuntimeMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC74B7962108C97900F9CA78 /* RuntimeMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B2082108D49A0070F895 /* RuntimeMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		FC74B79C2108C97900F9CA78 /* RuntimeMapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RuntimeMapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapperTests.swift; sourceTree = "<group>"; };
 		FC74B7A32108C97900F9CA78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC75B2082108D49A0070F895 /* RuntimeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				FC74B7962108C97900F9CA78 /* RuntimeMapper.h */,
+				FC75B2082108D49A0070F895 /* RuntimeMapper.swift */,
 				FC74B7972108C97900F9CA78 /* Info.plist */,
 			);
 			path = RuntimeMapper;
@@ -183,6 +186,7 @@
 				TargetAttributes = {
 					FC74B7922108C97900F9CA78 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 0940;
 					};
 					FC74B79B2108C97900F9CA78 = {
 						CreatedOnToolsVersion = 9.4;
@@ -286,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5405EF738839121B911AEE1 /* Pods-RuntimeMapper.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -449,6 +455,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thekan.RuntimeMapper;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -458,6 +465,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E038A32A192876F0C7E797D6 /* Pods-RuntimeMapper.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -484,6 +492,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F879BACEC1F02DAE7BC2FAC2 /* Pods-RuntimeMapperTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUER35A27W;
 				INFOPLIST_FILE = RuntimeMapperTests/Info.plist;
@@ -503,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6194ADB7976BC7AE0C62572 /* Pods-RuntimeMapperTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUER35A27W;
 				INFOPLIST_FILE = RuntimeMapperTests/Info.plist;
