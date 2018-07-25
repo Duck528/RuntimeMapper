@@ -1,0 +1,16 @@
+PODS:
+  - Runtime (0.7.1)
+
+DEPENDENCIES:
+  - Runtime
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Runtime
+
+SPEC CHECKSUMS:
+  Runtime: 6b152eab4773d494041afe5480a84c91d86961b9
+
+PODFILE CHECKSUM: ba25d368782774b5b828d4d6eed211f424b049bf
+
+COCOAPODS: 1.5.3
