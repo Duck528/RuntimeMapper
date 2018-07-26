@@ -13,6 +13,7 @@
 		FC74B7A22108C97900F9CA78 /* RuntimeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */; };
 		FC74B7A42108C97900F9CA78 /* RuntimeMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC74B7962108C97900F9CA78 /* RuntimeMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B2082108D49A0070F895 /* RuntimeMapper.swift */; };
+		FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapperTests.swift; sourceTree = "<group>"; };
 		FC74B7A32108C97900F9CA78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC75B2082108D49A0070F895 /* RuntimeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapper.swift; sourceTree = "<group>"; };
+		FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapperErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				FC74B7962108C97900F9CA78 /* RuntimeMapper.h */,
+				FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */,
 				FC75B2082108D49A0070F895 /* RuntimeMapper.swift */,
 				FC74B7972108C97900F9CA78 /* Info.plist */,
 			);
@@ -290,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */,
 				FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

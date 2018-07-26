@@ -9,6 +9,19 @@
 import Foundation
 import Runtime
 
+struct User {
+    var name: String = ""
+}
+
 public class RuntimeMapper {
-    
+    public func read<T>(from string: String, initializer: (() -> T)) throws -> T {
+        let instance = initializer()
+        guard let typeInfo = try? typeInfo(of: T.self) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        typeInfo.properties.forEach {
+            print($0.name)
+        }
+        return instance
+    }
 }
