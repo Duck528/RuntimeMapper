@@ -7,19 +7,25 @@
 //
 
 import UIKit
+import RuntimeMapper
+
+class User {
+    var name = ""
+    var age = 0
+}
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let runtimeMapper = RuntimeMapper()
+        try? runtimeMapper.read(from: "1234", initializer: User.init)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

@@ -9,9 +9,6 @@
 import Foundation
 import Runtime
 
-struct User {
-    var name: String = ""
-}
 
 public class RuntimeMapper {
     public func read<T>(from string: String, initializer: (() -> T)) throws -> T {
@@ -24,4 +21,6 @@ public class RuntimeMapper {
         }
         return instance
     }
+    
+    public init() { }
 }
