@@ -12,4 +12,8 @@ target 'RuntimeMapper' do
     # Pods for testing
   end
 
+  target 'SampleApp' do
+    inherit! :search_paths
+    pod 'Runtime'
+  end
 end
