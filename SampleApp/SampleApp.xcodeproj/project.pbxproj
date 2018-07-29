@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2052551472DBEA3729E679BF /* Pods_RuntimeMapper_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109686277F468069676EE349 /* Pods_RuntimeMapper_SampleApp.framework */; };
-		FC62AB1B210E248A001686E6 /* RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC62AB1A210E248A001686E6 /* RuntimeMapper.framework */; };
-		FC62AB1C210E248A001686E6 /* RuntimeMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC62AB1A210E248A001686E6 /* RuntimeMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC844B32210E1F3800425000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC844B31210E1F3800425000 /* AppDelegate.swift */; };
 		FC844B34210E1F3800425000 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC844B33210E1F3800425000 /* ViewController.swift */; };
 		FC844B37210E1F3800425000 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC844B35210E1F3800425000 /* Main.storyboard */; };
@@ -17,25 +15,10 @@
 		FC844B3C210E1F3900425000 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC844B3A210E1F3900425000 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		FC62AB1D210E248B001686E6 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC62AB1C210E248A001686E6 /* RuntimeMapper.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		109686277F468069676EE349 /* Pods_RuntimeMapper_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RuntimeMapper_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9E042296DCF1343512C06B /* Pods-RuntimeMapper-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper-SampleApp.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-RuntimeMapper-SampleApp/Pods-RuntimeMapper-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4D5DD22F6EF49E9605E70DE1 /* Pods-RuntimeMapper-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper-SampleApp.release.xcconfig"; path = "../Pods/Target Support Files/Pods-RuntimeMapper-SampleApp/Pods-RuntimeMapper-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
-		FC62AB1A210E248A001686E6 /* RuntimeMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RuntimeMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC844B2E210E1F3800425000 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC844B31210E1F3800425000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC844B33210E1F3800425000 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC62AB1B210E248A001686E6 /* RuntimeMapper.framework in Frameworks */,
 				2052551472DBEA3729E679BF /* Pods_RuntimeMapper_SampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,7 +60,6 @@
 		FC844B25210E1F3800425000 = {
 			isa = PBXGroup;
 			children = (
-				FC62AB1A210E248A001686E6 /* RuntimeMapper.framework */,
 				FC844B30210E1F3800425000 /* SampleApp */,
 				FC844B2F210E1F3800425000 /* Products */,
 				99B88B08AF6BE7E7379671C9 /* Pods */,
@@ -118,7 +99,6 @@
 				FC844B2A210E1F3800425000 /* Sources */,
 				FC844B2B210E1F3800425000 /* Frameworks */,
 				FC844B2C210E1F3800425000 /* Resources */,
-				FC62AB1D210E248B001686E6 /* Embed Frameworks */,
 				83F382F5132BCBB6DA30CD9E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
