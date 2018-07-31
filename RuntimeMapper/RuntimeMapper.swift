@@ -21,8 +21,19 @@ public class RuntimeMapper {
         var instance = initializer()
         for p in info.properties {
             if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
-                print("type: \(Swift.type(of: value))")
-                try? propertyInfo.set(value: value, on: &instance)
+                switch value {
+                case is Int:
+                    try? propertyInfo.set(value: value as! Int, on: &instance)
+                case is String:
+                    try? propertyInfo.set(value: value as! String, on: &instance)
+                case is Float:
+                    try? propertyInfo.set(value: value as! Float, on: &instance)
+                case is Double:
+                    try? propertyInfo.set(value: value as! Double, on: &instance)
+                default:
+                    break
+                }
+                
             }
         }
         return instance

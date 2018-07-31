@@ -13,9 +13,10 @@ import Runtime
 
 
 class Blog {
-    var id: NSNumber = 0
+    var id: Int = 0
     var url: String = ""
     var name: String = ""
+    var value: Float = 0
 }
 
 class ViewController: UIViewController {
@@ -41,7 +42,8 @@ class ViewController: UIViewController {
     {
         "id": 111,
         "url": "http://roadfiresoftware.com/blog/",
-        "name": "Roadfire Software Blog"
+        "name": "Roadfire Software Blog",
+        "value": 1231.11
     }
     """
 
@@ -53,6 +55,7 @@ class ViewController: UIViewController {
             print("id: \(blog.id)")
             print("url \(blog.url)")
             print("name: \(blog.name)")
+            print("value: \(blog.value)")
         }
     }
 }
