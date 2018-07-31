@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1149B55E369684348A77CB7A /* Pods_RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DEE555F576413EA9F4E5CC7 /* Pods_RuntimeMapper.framework */; };
 		9E07CAA696E5669D377988D3 /* Pods_RuntimeMapperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9C7B857B5E78380F43AC00 /* Pods_RuntimeMapperTests.framework */; };
+		FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62AB22210E36AC001686E6 /* JsonHelper.swift */; };
 		FC74B79D2108C97900F9CA78 /* RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */; };
 		FC74B7A22108C97900F9CA78 /* RuntimeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */; };
 		FC74B7A42108C97900F9CA78 /* RuntimeMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC74B7962108C97900F9CA78 /* RuntimeMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,6 +34,7 @@
 		E038A32A192876F0C7E797D6 /* Pods-RuntimeMapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapper/Pods-RuntimeMapper.release.xcconfig"; sourceTree = "<group>"; };
 		E6194ADB7976BC7AE0C62572 /* Pods-RuntimeMapperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.release.xcconfig"; sourceTree = "<group>"; };
 		F879BACEC1F02DAE7BC2FAC2 /* Pods-RuntimeMapperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FC62AB22210E36AC001686E6 /* JsonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
 		FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RuntimeMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC74B7962108C97900F9CA78 /* RuntimeMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RuntimeMapper.h; sourceTree = "<group>"; };
 		FC74B7972108C97900F9CA78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FC62AB21210E369F001686E6 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				FC62AB22210E36AC001686E6 /* JsonHelper.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		FC74B7892108C97900F9CA78 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +117,7 @@
 		FC74B7952108C97900F9CA78 /* RuntimeMapper */ = {
 			isa = PBXGroup;
 			children = (
+				FC62AB21210E369F001686E6 /* Util */,
 				FC74B7962108C97900F9CA78 /* RuntimeMapper.h */,
 				FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */,
 				FC75B2082108D49A0070F895 /* RuntimeMapper.swift */,
@@ -293,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */,
 				FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */,
 				FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */,
 			);

@@ -12,7 +12,7 @@ public class JsonHelper {
     public static func convertToDictionary(from jsonString: String, with keys: [String]) -> [String: Any] {
         guard
             let jsonData = jsonString.data(using: .utf8),
-            let json = try? JSONSerialization.jsonObject(with: jsonData, options: []),
+            let json = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]),
             let jsonDict = json as? [String: Any] else {
                 return [:]
         }
