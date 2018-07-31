@@ -8,6 +8,7 @@
 
 import UIKit
 import RuntimeMapper
+import SwiftyJSON
 import Runtime
 
 

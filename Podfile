@@ -4,6 +4,7 @@ use_frameworks!
 
 target 'RuntimeMapper' do
     pod 'Runtime'
+    pod 'SwiftyJSON'
     
     target 'RuntimeMapperTests' do
         inherit! :search_paths
