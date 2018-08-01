@@ -24,19 +24,20 @@ class ViewController: UIViewController {
     
     let jsonArrayString =
     """
-    {
-        "blogs": [
-        {
+    [{
         "id": 111,
         "url": "http://roadfiresoftware.com/blog/",
-        "name": "Roadfire Software Blog"
+        "name": "Roadfire Software Blog",
+        "value": 1231.11,
+        "isSecret": false
         },
         {
-        "id": 345,
-        "url": "https://developer.apple.com/swift/blog/",
-        "name": "Swift Developer Blog"
-        }]
-    }
+        "id": 123,
+        "url": "http://thekan.blog.com",
+        "name": "thekan",
+        "value": 21312.11123,
+        "isSecret": true
+    }]
     """
     let jsonSigleString =
     """
