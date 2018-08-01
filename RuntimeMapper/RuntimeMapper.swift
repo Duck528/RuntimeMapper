@@ -26,14 +26,18 @@ public class RuntimeMapper {
                     try? propertyInfo.set(value: value as! Int, on: &instance)
                 case is String:
                     try? propertyInfo.set(value: value as! String, on: &instance)
-                case is Float:
-                    try? propertyInfo.set(value: value as! Float, on: &instance)
-                case is Double:
-                    try? propertyInfo.set(value: value as! Double, on: &instance)
+                case let number as NSNumber:
+                    switch String(describing: propertyInfo.type) {
+                    case "Float":
+                        try? propertyInfo.set(value: number.floatValue, on: &instance)
+                    case "Double":
+                        try? propertyInfo.set(value: number.doubleValue, on: &instance)
+                    default:
+                        break
+                    }
                 default:
                     break
                 }
-                
             }
         }
         return instance
