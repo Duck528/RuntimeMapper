@@ -11,7 +11,30 @@ import Runtime
 
 
 public class RuntimeMapper {
+    public func read<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
+        guard let info = try? typeInfo(of: T.self) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        let propertyNames = info.properties.map { $0.name }
+        let mappedDict = JsonHelper.convertToDictionary(from: jsonString, with: propertyNames)
+        
+        var instance = initializer()
+        for p in info.properties {
+            if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
+                do {
+                    try setValue(value, to: propertyInfo, in: &instance)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        return instance
+    }
+    
+    public init() { }
+}
 
+extension RuntimeMapper {
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
             switch String(describing: propertyInfo.type) {
@@ -42,26 +65,4 @@ public class RuntimeMapper {
             throw error
         }
     }
-    
-    public func read<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
-        guard let info = try? typeInfo(of: T.self) else {
-            throw RuntimeMapperErrors.UnsupportedType
-        }
-        let propertyNames = info.properties.map { $0.name }
-        let mappedDict = JsonHelper.convertToDictionary(from: jsonString, with: propertyNames)
-        
-        var instance = initializer()
-        for p in info.properties {
-            if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
-                do {
-                    try setValue(value, to: propertyInfo, in: &instance)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        return instance
-    }
-    
-    public init() { }
 }
