@@ -17,6 +17,7 @@ class Blog {
     var url: String = ""
     var name: String = ""
     var value: Float = 0
+    var isSecret: Bool = true
 }
 
 class ViewController: UIViewController {
@@ -43,7 +44,8 @@ class ViewController: UIViewController {
         "id": 111,
         "url": "http://roadfiresoftware.com/blog/",
         "name": "Roadfire Software Blog",
-        "value": 1231.11
+        "value": 1231.11,
+        "isSecret": false
     }
     """
 
@@ -56,6 +58,7 @@ class ViewController: UIViewController {
             print("url \(blog.url)")
             print("name: \(blog.name)")
             print("value: \(blog.value)")
+            print("isSecret: \(blog.isSecret)")
         }
     }
 }

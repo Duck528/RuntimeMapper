@@ -11,6 +11,38 @@ import Runtime
 
 
 public class RuntimeMapper {
+
+    private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
+        do {
+            switch String(describing: propertyInfo.type) {
+            case "Int":
+                if let intValue = value as? Int {
+                    try propertyInfo.set(value: intValue, on: &instance)
+                }
+            case "Float":
+                if let numberValue = value as? NSNumber {
+                    try propertyInfo.set(value: numberValue.floatValue, on: &instance)
+                }
+            case "Double":
+                if let numberValue = value as? NSNumber {
+                    try propertyInfo.set(value: numberValue.doubleValue, on: &instance)
+                }
+            case "Bool":
+                if let numberValue = value as? NSNumber {
+                    try propertyInfo.set(value: numberValue.boolValue, on: &instance)
+                }
+            case "String":
+                if let stringValue = value as? String {
+                    try propertyInfo.set(value: stringValue, on: &instance)
+                }
+            default:
+                break
+            }
+        } catch {
+            throw error
+        }
+    }
+    
     public func read<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
         guard let info = try? typeInfo(of: T.self) else {
             throw RuntimeMapperErrors.UnsupportedType
@@ -21,22 +53,11 @@ public class RuntimeMapper {
         var instance = initializer()
         for p in info.properties {
             if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
-                switch value {
-                case is Int:
-                    try? propertyInfo.set(value: value as! Int, on: &instance)
-                case is String:
-                    try? propertyInfo.set(value: value as! String, on: &instance)
-                case let number as NSNumber:
-                    switch String(describing: propertyInfo.type) {
-                    case "Float":
-                        try? propertyInfo.set(value: number.floatValue, on: &instance)
-                    case "Double":
-                        try? propertyInfo.set(value: number.doubleValue, on: &instance)
-                    default:
-                        break
-                    }
-                default:
-                    break
+                print("value: \(value), type: \(Swift.type(of: value)), propType: \(propertyInfo.type)")
+                do {
+                    try setValue(value, to: propertyInfo, in: &instance)
+                } catch {
+                    print(error.localizedDescription)
                 }
             }
         }
