@@ -11,7 +11,7 @@ import Runtime
 
 
 public class RuntimeMapper {
-    public func read<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
+    public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
         guard let info = try? typeInfo(of: T.self) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
@@ -29,6 +29,30 @@ public class RuntimeMapper {
             }
         }
         return instance
+    }
+    
+    public func readArray<T>(from jsonString: String, initializer: (() -> T)) throws -> [T] {
+        guard let info = try? typeInfo(of: T.self) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        let propertyNames = info.properties.map { $0.name }
+        let mappedDicts = JsonHelper.convertToDictionaries(from: jsonString, with: propertyNames)
+        
+        var instanceList: [T] = []
+        for mappedDict in mappedDicts {
+            var instance = initializer()
+            for p in info.properties {
+                if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
+                    do {
+                        try setValue(value, to: propertyInfo, in: &instance)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            instanceList.append(instance)
+        }
+        return instanceList
     }
     
     public init() { }

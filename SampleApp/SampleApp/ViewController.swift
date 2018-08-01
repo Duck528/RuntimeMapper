@@ -54,12 +54,24 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let runtimeMapper = RuntimeMapper()
-        if let blog = try? runtimeMapper.read(from: jsonSigleString, initializer: Blog.init) {
-            print("id: \(blog.id)")
-            print("url \(blog.url)")
-            print("name: \(blog.name)")
-            print("value: \(blog.value)")
-            print("isSecret: \(blog.isSecret)")
+        // SingleTest
+//        if let blog = try? runtimeMapper.readSingle(from: jsonSigleString, initializer: Blog.init) {
+//            print("id: \(blog.id)")
+//            print("url \(blog.url)")
+//            print("name: \(blog.name)")
+//            print("value: \(blog.value)")
+//            print("isSecret: \(blog.isSecret)")
+//        }
+        
+        // ArrayTest
+        if let blogs = try? runtimeMapper.readArray(from: jsonArrayString, initializer: Blog.init) {
+            blogs.forEach {
+                print("id: \($0.id)")
+                print("url \($0.url)")
+                print("name: \($0.name)")
+                print("value: \($0.value)")
+                print("isSecret: \($0.isSecret)")
+            }
         }
     }
 }
