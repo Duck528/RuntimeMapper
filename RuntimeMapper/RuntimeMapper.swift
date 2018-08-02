@@ -12,21 +12,20 @@ import Runtime
 
 public class RuntimeMapper {
     
-    let intType = String(describing: Int.self)
-    let optionalIntType = String(describing: Int?.self)
+    private let intType = String(describing: Int.self)
+    private let optionalIntType = String(describing: Int?.self)
     
-    let floatType = String(describing: Float.self)
-    let optionalFloatType = String(describing: Float?.self)
+    private let floatType = String(describing: Float.self)
+    private let optionalFloatType = String(describing: Float?.self)
     
-    let doubleType = String(describing: Double.self)
-    let optionalDoubleType = String(describing: Double?.self)
+    private let doubleType = String(describing: Double.self)
+    private let optionalDoubleType = String(describing: Double?.self)
     
-    let boolType = String(describing: Bool.self)
-    let optionalBoolType = String(describing: Bool?.self)
+    private let boolType = String(describing: Bool.self)
+    private let optionalBoolType = String(describing: Bool?.self)
     
-    let stringType = String(describing: String.self)
-    let optionalStringType = String(describing: String?.self)
-    
+    private let stringType = String(describing: String.self)
+    private let optionalStringType = String(describing: String?.self)
     
     public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
         guard let info = try? typeInfo(of: T.self) else {
