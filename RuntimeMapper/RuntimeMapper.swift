@@ -99,7 +99,7 @@ extension RuntimeMapper {
                     try propertyInfo.set(value: stringValue, on: &instance)
                 }
             default:
-                break
+                print("type: \(String(describing: propertyInfo.type)), value: \(value)")
             }
         } catch {
             throw error

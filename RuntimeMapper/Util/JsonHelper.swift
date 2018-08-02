@@ -9,6 +9,32 @@
 import Foundation
 
 public class JsonHelper {
+    
+    public enum JsonType {
+        case object(jsonDict: [String: Any])
+        case list(jsonDicts: [[String: Any]])
+    }
+    
+    public enum JsonHelperErrors: Error {
+        case invalidJsonFormat
+    }
+    
+    public static func convertToDictionary(from jsonString: String) throws -> JsonType {
+        guard
+            let jsonData = jsonString.data(using: .utf8),
+            let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
+                throw JsonHelperErrors.invalidJsonFormat
+        }
+        
+        if let jsonDict = json as? [String: Any] {
+            return .object(jsonDict: jsonDict)
+        } else if let jsonDicts = json as? [[String: Any]] {
+            return .list(jsonDicts: jsonDicts)
+        } else {
+            throw JsonHelperErrors.invalidJsonFormat
+        }
+    }
+    
     public static func convertToDictionary(from jsonString: String, with keys: [String]) -> [String: Any] {
         guard
             let jsonData = jsonString.data(using: .utf8),

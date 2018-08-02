@@ -15,6 +15,7 @@ class User {
     var name: String = ""
     var age: Int = 0
     var blog: Blog = Blog()
+    var blogArray: [Blog] = []
 }
 
 class Blog {
@@ -40,7 +41,23 @@ class ViewController: UIViewController {
             "value": 1231.11,
             "doubleValue": 123213.12322,
             "isSecret": false
-        }
+        },
+        "blogArray": [{
+            "id": 111,
+            "url": "http://roadfiresoftware.com/blog/",
+            "name": "Roadfire Software Blog",
+            "value": 1231.11,
+            "doubleValue": 123213.12322,
+            "isSecret": false
+        },
+        {
+            "id": 111,
+            "url": "http://roadfiresoftware.com/blog/",
+            "name": "Roadfire Software Blog",
+            "value": 1231.11,
+            "doubleValue": 123213.12322,
+            "isSecret": false
+        }]
     }
     """
     
@@ -84,6 +101,7 @@ class ViewController: UIViewController {
             print("name: \(user.name)")
             print("age: \(user.age)")
             print("blog name: \(user.blog.name)")
+            print("blog array: \(user.blogArray)")
         }
     }
 }
