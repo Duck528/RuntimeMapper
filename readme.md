@@ -3,7 +3,7 @@
 RuntimeMapper is a Swift library to dynamic mapping with json or class. this library using [Runtime](https://github.com/wickwirew/Runtime) to dynamically setting a property. this library for now under development.
 
 #### How to use 
-- Single Json
+- Define Model Class
 ```swift
     class Blog {
         var id: Int = 0
@@ -12,6 +12,11 @@ RuntimeMapper is a Swift library to dynamic mapping with json or class. this lib
         var value: Float = 0
         var isSecret: Bool = true
     }
+```
+
+- Single Json
+```swift
+
     
     let jsonSigleString =
     """
@@ -36,6 +41,23 @@ RuntimeMapper is a Swift library to dynamic mapping with json or class. this lib
 
 - Array Json 
 ```swift
+    let jsonArrayString =
+    """
+    [{
+        "id": 111,
+        "url": "http://roadfiresoftware.com/blog/",
+        "name": "Roadfire Software Blog",
+        "value": 1231.11,
+        "isSecret": false
+        },
+        {
+        "id": 123,
+        "url": "http://thekan.blog.com",
+        "name": "thekan",
+        "value": 21312.11123,
+        "isSecret": true
+    }]
+    
     if let blogs = try? runtimeMapper.readArray(from: jsonArrayString, initializer: Blog.init) {
         blogs.forEach {
             print("id: \($0.id)")
