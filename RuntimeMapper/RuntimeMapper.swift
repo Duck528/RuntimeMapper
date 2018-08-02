@@ -36,9 +36,9 @@ public class RuntimeMapper {
         
         var instance = initializer()
         for p in info.properties {
-            if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
+            if let value = mappedDict[p.name] {
                 do {
-                    try setValue(value, to: propertyInfo, in: &instance)
+                    try setValue(value, to: p, in: &instance)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -58,9 +58,9 @@ public class RuntimeMapper {
         for mappedDict in mappedDicts {
             var instance = initializer()
             for p in info.properties {
-                if let propertyInfo = try? info.property(named: p.name), let value = mappedDict[p.name] {
+                if let value = mappedDict[p.name] {
                     do {
-                        try setValue(value, to: propertyInfo, in: &instance)
+                        try setValue(value, to: p, in: &instance)
                     } catch {
                         print(error.localizedDescription)
                     }
