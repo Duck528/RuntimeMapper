@@ -11,6 +11,11 @@ import RuntimeMapper
 import SwiftyJSON
 import Runtime
 
+class User {
+    var name: String = ""
+    var age: Int = 0
+    var blog: Blog?
+}
 
 class Blog {
     var id: Int? = 0
@@ -22,6 +27,22 @@ class Blog {
 }
 
 class ViewController: UIViewController {
+    
+    let jsonNestedString =
+    """
+    {
+        "name": "thekan",
+        "age": 24,
+        "blog": {
+            "id": 111,
+            "url": "http://roadfiresoftware.com/blog/",
+            "name": "Roadfire Software Blog",
+            "value": 1231.11,
+            "doubleValue": 123213.12322,
+            "isSecret": false
+        }
+    }
+    """
     
     let jsonArrayString =
     """
@@ -42,6 +63,7 @@ class ViewController: UIViewController {
         "isSecret": true
     }]
     """
+    
     let jsonSigleString =
     """
     {
@@ -56,31 +78,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let runtimeMapper = RuntimeMapper()
-        // SingleTest
-        print("### Single JSON")
-        if let blog = try? runtimeMapper.readSingle(from: jsonSigleString, initializer: Blog.init) {
-            print("id: \(blog.id ?? -1)")
-            print("url \(blog.url)")
-            print("name: \(blog.name)")
-            print("value: \(blog.value)")
-            print("isSecret: \(blog.isSecret)")
-            print("doubleValue: \(blog.doubleValue)")
-        }
-        
-        // ArrayTest
-        print("### Array JSON")
-        if let blogs = try? runtimeMapper.readArray(from: jsonArrayString, initializer: Blog.init) {
-            blogs.forEach {
-                print("id: \($0.id ?? -1)")
-                print("url \($0.url)")
-                print("name: \($0.name)")
-                print("value: \($0.value)")
-                print("isSecret: \($0.isSecret)")
-                print("doubleValue: \($0.doubleValue)")
-            }
-        }
     }
 }
 
