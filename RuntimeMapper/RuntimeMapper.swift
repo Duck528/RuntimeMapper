@@ -13,10 +13,19 @@ import Runtime
 public class RuntimeMapper {
     
     let intType = String(describing: Int.self)
+    let optionalIntType = String(describing: Int?.self)
+    
     let floatType = String(describing: Float.self)
+    let optionalFloatType = String(describing: Float?.self)
+    
     let doubleType = String(describing: Double.self)
+    let optionalDoubleType = String(describing: Double?.self)
+    
     let boolType = String(describing: Bool.self)
+    let optionalBoolType = String(describing: Bool?.self)
+    
     let stringType = String(describing: String.self)
+    let optionalStringType = String(describing: String?.self)
     
     
     public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
@@ -70,23 +79,23 @@ extension RuntimeMapper {
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
             switch String(describing: propertyInfo.type) {
-            case intType:
+            case intType, optionalIntType:
                 if let intValue = value as? Int {
                     try propertyInfo.set(value: intValue, on: &instance)
                 }
-            case floatType:
+            case floatType, optionalFloatType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.floatValue, on: &instance)
                 }
-            case doubleType:
+            case doubleType, optionalDoubleType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.doubleValue, on: &instance)
                 }
-            case boolType:
+            case boolType, optionalBoolType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.boolValue, on: &instance)
                 }
-            case stringType:
+            case stringType, optionalStringType:
                 if let stringValue = value as? String {
                     try propertyInfo.set(value: stringValue, on: &instance)
                 }

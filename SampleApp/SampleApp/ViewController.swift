@@ -13,7 +13,7 @@ import Runtime
 
 
 class Blog {
-    var id: Int = 0
+    var id: Int? = 0
     var url: String = ""
     var name: String = ""
     var value: Float = 0
