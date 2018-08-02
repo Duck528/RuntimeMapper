@@ -18,6 +18,7 @@ class Blog {
     var name: String = ""
     var value: Float = 0
     var isSecret: Bool = true
+    var doubleValue: Double = 0
 }
 
 class ViewController: UIViewController {
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
         "url": "http://roadfiresoftware.com/blog/",
         "name": "Roadfire Software Blog",
         "value": 1231.11,
+        "doubleValue": 81232.12322,
         "isSecret": false
         },
         {
@@ -36,6 +38,7 @@ class ViewController: UIViewController {
         "url": "http://thekan.blog.com",
         "name": "thekan",
         "value": 21312.11123,
+        "doubleValue": 123213.12322,
         "isSecret": true
     }]
     """
@@ -46,6 +49,7 @@ class ViewController: UIViewController {
         "url": "http://roadfiresoftware.com/blog/",
         "name": "Roadfire Software Blog",
         "value": 1231.11,
+        "doubleValue": 123213.12322,
         "isSecret": false
     }
     """
@@ -55,15 +59,18 @@ class ViewController: UIViewController {
         
         let runtimeMapper = RuntimeMapper()
         // SingleTest
-//        if let blog = try? runtimeMapper.readSingle(from: jsonSigleString, initializer: Blog.init) {
-//            print("id: \(blog.id)")
-//            print("url \(blog.url)")
-//            print("name: \(blog.name)")
-//            print("value: \(blog.value)")
-//            print("isSecret: \(blog.isSecret)")
-//        }
+        print("### Single JSON")
+        if let blog = try? runtimeMapper.readSingle(from: jsonSigleString, initializer: Blog.init) {
+            print("id: \(blog.id)")
+            print("url \(blog.url)")
+            print("name: \(blog.name)")
+            print("value: \(blog.value)")
+            print("isSecret: \(blog.isSecret)")
+            print("doubleValue: \(blog.doubleValue)")
+        }
         
         // ArrayTest
+        print("### Array JSON")
         if let blogs = try? runtimeMapper.readArray(from: jsonArrayString, initializer: Blog.init) {
             blogs.forEach {
                 print("id: \($0.id)")
@@ -71,6 +78,7 @@ class ViewController: UIViewController {
                 print("name: \($0.name)")
                 print("value: \($0.value)")
                 print("isSecret: \($0.isSecret)")
+                print("doubleValue: \($0.doubleValue)")
             }
         }
     }
