@@ -61,7 +61,7 @@ class ViewController: UIViewController {
         // SingleTest
         print("### Single JSON")
         if let blog = try? runtimeMapper.readSingle(from: jsonSigleString, initializer: Blog.init) {
-            print("id: \(blog.id)")
+            print("id: \(blog.id ?? -1)")
             print("url \(blog.url)")
             print("name: \(blog.name)")
             print("value: \(blog.value)")
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         print("### Array JSON")
         if let blogs = try? runtimeMapper.readArray(from: jsonArrayString, initializer: Blog.init) {
             blogs.forEach {
-                print("id: \($0.id)")
+                print("id: \($0.id ?? -1)")
                 print("url \($0.url)")
                 print("name: \($0.name)")
                 print("value: \($0.value)")
