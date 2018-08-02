@@ -27,6 +27,7 @@ RuntimeMapper is a Swift library to dynamic mapping with json or class. this lib
         "value": 1231.11,
         "isSecret": false
     }
+    """
     
     let runtimeMapper = RuntimeMapper()
     if let blog = try? runtimeMapper.readSingle(from: jsonSigleString, initializer: Blog.init) {
@@ -36,7 +37,6 @@ RuntimeMapper is a Swift library to dynamic mapping with json or class. this lib
         print("value: \(blog.value)")
         print("isSecret: \(blog.isSecret)")
     }
-    """
 ```
 
 - Array Json 
