@@ -14,7 +14,7 @@ import Runtime
 class User {
     var name: String = ""
     var age: Int = 0
-    var blog: Blog?
+    var blog: Blog = Blog()
 }
 
 class Blog {
@@ -78,6 +78,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let runtimeMapper = RuntimeMapper()
+        if let user = try? runtimeMapper.readSingle(from: jsonNestedString, initializer: User.init) {
+            print("name: \(user.name)")
+            print("age: \(user.age)")
+            print("blog name: \(user.blog.name)")
+        }
     }
 }
 
