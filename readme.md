@@ -67,4 +67,5 @@ RuntimeMapper is a Swift library to dynamic mapping with json or class. this lib
             print("isSecret: \($0.isSecret)")
         }
     }
+    """
 ```
