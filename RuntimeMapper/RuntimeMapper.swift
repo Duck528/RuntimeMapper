@@ -11,6 +11,14 @@ import Runtime
 
 
 public class RuntimeMapper {
+    
+    let intType = String(describing: Int.self)
+    let floatType = String(describing: Float.self)
+    let doubleType = String(describing: Double.self)
+    let boolType = String(describing: Bool.self)
+    let stringType = String(describing: String.self)
+    
+    
     public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
         guard let info = try? typeInfo(of: T.self) else {
             throw RuntimeMapperErrors.UnsupportedType
@@ -62,23 +70,23 @@ extension RuntimeMapper {
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
             switch String(describing: propertyInfo.type) {
-            case "Int":
+            case intType:
                 if let intValue = value as? Int {
                     try propertyInfo.set(value: intValue, on: &instance)
                 }
-            case "Float":
+            case floatType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.floatValue, on: &instance)
                 }
-            case "Double":
+            case doubleType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.doubleValue, on: &instance)
                 }
-            case "Bool":
+            case boolType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.boolValue, on: &instance)
                 }
-            case "String":
+            case stringType:
                 if let stringValue = value as? String {
                     try propertyInfo.set(value: stringValue, on: &instance)
                 }
