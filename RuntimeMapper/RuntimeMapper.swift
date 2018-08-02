@@ -9,6 +9,10 @@
 import Foundation
 import Runtime
 
+struct JsonClasPair<T> {
+    let key: String
+    let classInitializer: (() -> T)
+}
 
 public class RuntimeMapper {
     
