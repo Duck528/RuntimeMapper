@@ -81,17 +81,6 @@ public class RuntimeMapper {
             var instance = initializer()
             for p in info.properties {
                 if let value = mappedDict[p.name] {
-                    
-                    let pType = String(describing: p.type)
-                    if let finded = findParseInfo(by: pType) {
-                        switch finded.parseType {
-                        case .single:
-                            try? readSingle(from: value as! String, initializer: finded.initializer)
-                        case .array:
-                            try? readArray(from: value as! String, initializer: finded.initializer)
-                        }
-                    }
-                    
                     do {
                         try setValue(value, to: p, in: &instance)
                     } catch {
