@@ -9,12 +9,21 @@
 import Foundation
 import Runtime
 
-struct JsonClasPair<T> {
+
+public struct ParseInfo {
     let key: String
-    let classInitializer: (() -> T)
+    let initializer: (() -> Any)
+    let parseType: ParseType
+}
+
+public enum ParseType {
+    case array
+    case single
 }
 
 public class RuntimeMapper {
+    
+    private var parseInfos: [ParseInfo] = []
     
     private let intType = String(describing: Int.self)
     private let optionalIntType = String(describing: Int?.self)
@@ -31,10 +40,19 @@ public class RuntimeMapper {
     private let stringType = String(describing: String.self)
     private let optionalStringType = String(describing: String?.self)
     
+    private func findParseInfo(by key: String) -> ParseInfo? {
+        return parseInfos.first(where: { $0.key == key })
+    }
+    
+    public func register(key: String, initializer: @escaping (() -> Any), parseType: ParseType) {
+        parseInfos.append(ParseInfo(key: key, initializer: initializer, parseType: parseType))
+    }
+    
     public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
         guard let info = try? typeInfo(of: T.self) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
+        
         let propertyNames = info.properties.map { $0.name }
         let mappedDict = JsonHelper.convertToDictionary(from: jsonString, with: propertyNames)
         
@@ -63,6 +81,17 @@ public class RuntimeMapper {
             var instance = initializer()
             for p in info.properties {
                 if let value = mappedDict[p.name] {
+                    
+                    let pType = String(describing: p.type)
+                    if let finded = findParseInfo(by: pType) {
+                        switch finded.parseType {
+                        case .single:
+                            try? readSingle(from: value as! String, initializer: finded.initializer)
+                        case .array:
+                            try? readArray(from: value as! String, initializer: finded.initializer)
+                        }
+                    }
+                    
                     do {
                         try setValue(value, to: p, in: &instance)
                     } catch {
@@ -81,7 +110,8 @@ public class RuntimeMapper {
 extension RuntimeMapper {
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
-            switch String(describing: propertyInfo.type) {
+            let propertyType = String(describing: propertyInfo.type)
+            switch propertyType {
             case intType, optionalIntType:
                 if let intValue = value as? Int {
                     try propertyInfo.set(value: intValue, on: &instance)
@@ -103,7 +133,16 @@ extension RuntimeMapper {
                     try propertyInfo.set(value: stringValue, on: &instance)
                 }
             default:
-                print("type: \(String(describing: propertyInfo.type)), value: \(value)")
+                if let findedParseInfo = findParseInfo(by: propertyType), let jsonString = value as? String {
+                    switch findedParseInfo.parseType {
+                    case .array:
+                        let array = try readArray(from: jsonString, initializer: findedParseInfo.initializer)
+                        try propertyInfo.set(value: array, on: &instance)
+                    case .single:
+                        let object = try readSingle(from: jsonString, initializer: findedParseInfo.initializer)
+                        try propertyInfo.set(value: object, on: &instance)
+                    }
+                }
             }
         } catch {
             throw error

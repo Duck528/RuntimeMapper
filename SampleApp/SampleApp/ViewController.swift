@@ -8,7 +8,6 @@
 
 import UIKit
 import RuntimeMapper
-import SwiftyJSON
 import Runtime
 
 class User {
@@ -97,6 +96,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let runtimeMapper = RuntimeMapper()
+        runtimeMapper.register(key: "blogArray", to: <#T##(() -> Any)##(() -> Any)##() -> Any#>)
         if let user = try? runtimeMapper.readSingle(from: jsonNestedString, initializer: User.init) {
             print("name: \(user.name)")
             print("age: \(user.age)")
