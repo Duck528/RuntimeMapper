@@ -100,6 +100,7 @@ extension RuntimeMapper {
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
             let propertyType = String(describing: propertyInfo.type)
+            print("type: \(propertyType), value: \(value)")
             switch propertyType {
             case intType, optionalIntType:
                 if let intValue = value as? Int {
@@ -122,15 +123,20 @@ extension RuntimeMapper {
                     try propertyInfo.set(value: stringValue, on: &instance)
                 }
             default:
-                if let findedParseInfo = findParseInfo(by: propertyType), let jsonString = value as? String {
-                    switch findedParseInfo.parseType {
-                    case .array:
-                        let array = try readArray(from: jsonString, initializer: findedParseInfo.initializer)
-                        try propertyInfo.set(value: array, on: &instance)
-                    case .single:
-                        let object = try readSingle(from: jsonString, initializer: findedParseInfo.initializer)
-                        try propertyInfo.set(value: object, on: &instance)
-                    }
+                guard
+                    let findedParseInfo = findParseInfo(by: propertyType),
+                    let dict = value as? [String: Any],
+                    let jsonString = JsonHelper.convertToJsonString(from: dict) else {
+                        return
+                }
+                
+                switch findedParseInfo.parseType {
+                case .array:
+                    let array = try readArray(from: jsonString, initializer: findedParseInfo.initializer)
+                    try propertyInfo.set(value: array, on: &instance)
+                case .single:
+                    let object = try readSingle(from: jsonString, initializer: findedParseInfo.initializer)
+                    try propertyInfo.set(value: object, on: &instance)
                 }
             }
         } catch {

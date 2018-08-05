@@ -19,6 +19,15 @@ public class JsonHelper {
         case invalidJsonFormat
     }
     
+    public static func convertToJsonString(from dictionary: [String: Any]) -> String? {
+        guard
+            let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: []),
+            let jsonString = String(data: jsonData, encoding: .utf8) else {
+                return nil
+        }
+        return jsonString
+    }
+    
     public static func convertToDictionary(from jsonString: String) throws -> JsonType {
         guard
             let jsonData = jsonString.data(using: .utf8),
