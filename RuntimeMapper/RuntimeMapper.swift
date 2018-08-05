@@ -97,10 +97,29 @@ public class RuntimeMapper {
 }
 
 extension RuntimeMapper {
+    
+    private func convertToJson(from value: Any, type: ParseType) -> String? {
+        switch type {
+        case .single:
+            guard
+                let dict = value as? [String: Any],
+                let jsonString = JsonHelper.convertToJsonString(from: dict) else {
+                    return nil
+            }
+            return jsonString
+        case .array:
+            guard
+                let dicts = value as? [[String: Any]],
+                let jsonString = JsonHelper.convertToJsonString(from: dicts) else {
+                    return nil
+            }
+            return jsonString
+        }
+    }
+    
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
-            let propertyType = String(describing: propertyInfo.type)
-            switch propertyType {
+            switch String(describing: propertyInfo.type) {
             case intType, optionalIntType:
                 if let intValue = value as? Int {
                     try propertyInfo.set(value: intValue, on: &instance)
@@ -123,17 +142,15 @@ extension RuntimeMapper {
                 }
             default:
                 guard
-                    let findedParseInfo = findParseInfo(by: propertyType),
-                    let dict = value as? [String: Any],
-                    let jsonString = JsonHelper.convertToJsonString(from: dict) else {
+                    let findedParseInfo = findParseInfo(by: propertyInfo.name),
+                    let jsonString = convertToJson(from: value, type: findedParseInfo.parseType) else {
                         return
                 }
                 
                 switch findedParseInfo.parseType {
                 case .array:
-                    break
-//                    let array = try readArray(from: jsonString, initializer: findedParseInfo.initializer)
-//                    try propertyInfo.set(value: array, on: &instance)
+                    let array = try readArray(from: jsonString, with: findedParseInfo.classType)
+                    try propertyInfo.set(value: array, on: &instance)
                 case .single:
                     let object = try readSingle(from: jsonString, with: findedParseInfo.classType)
                     try propertyInfo.set(value: object, on: &instance)
