@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let runtimeMapper = RuntimeMapper()
-        runtimeMapper.register(key: "Blog", initializer: Blog.init, parseType: .single)
+        runtimeMapper.register(key: "Blog", classType: Blog.self, parseType: .single)
         if let user = try? runtimeMapper.readSingle(from: jsonNestedString, initializer: User.init) {
             print("name: \(user.name)")
             print("age: \(user.age)")

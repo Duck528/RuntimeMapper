@@ -12,7 +12,7 @@ import Runtime
 
 public struct ParseInfo {
     let key: String
-    let initializer: (() -> Any)
+    let classType: Any.Type
     let parseType: ParseType
 }
 
@@ -44,8 +44,8 @@ public class RuntimeMapper {
         return parseInfos.first(where: { $0.key == key })
     }
     
-    public func register(key: String, initializer: @escaping (() -> Any), parseType: ParseType) {
-        parseInfos.append(ParseInfo(key: key, initializer: initializer, parseType: parseType))
+    public func register(key: String, classType: Any.Type, parseType: ParseType) {
+        parseInfos.append(ParseInfo(key: key, classType: classType, parseType: parseType))
     }
     
     public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
@@ -57,6 +57,26 @@ public class RuntimeMapper {
         let mappedDict = JsonHelper.convertToDictionary(from: jsonString, with: propertyNames)
         
         var instance = initializer()
+        for p in info.properties {
+            if let value = mappedDict[p.name] {
+                do {
+                    try setValue(value, to: p, in: &instance)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        return instance
+    }
+    
+    private func readSingle(from jsonString: String, with type: Any.Type) throws -> Any {
+        guard let info = try? typeInfo(of: type.self), var instance = try? createInstance(of: type) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        
+        let propertyNames = info.properties.map { $0.name }
+        let mappedDict = JsonHelper.convertToDictionary(from: jsonString, with: propertyNames)
+        
         for p in info.properties {
             if let value = mappedDict[p.name] {
                 do {
@@ -132,10 +152,11 @@ extension RuntimeMapper {
                 
                 switch findedParseInfo.parseType {
                 case .array:
-                    let array = try readArray(from: jsonString, initializer: findedParseInfo.initializer)
-                    try propertyInfo.set(value: array, on: &instance)
+                    break
+//                    let array = try readArray(from: jsonString, initializer: findedParseInfo.initializer)
+//                    try propertyInfo.set(value: array, on: &instance)
                 case .single:
-                    let object = try readSingle(from: jsonString, initializer: findedParseInfo.initializer)
+                    let object = try readSingle(from: jsonString, with: findedParseInfo.classType)
                     try propertyInfo.set(value: object, on: &instance)
                 }
             }
