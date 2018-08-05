@@ -92,6 +92,7 @@ class ViewController: UIViewController {
             print("name: \(user.name)")
             print("age: \(user.age)")
             print("blog name: \(user.blog.name)")
+            print("blog id: \(user.blog.id ?? -1)")
         }
     }
 }
