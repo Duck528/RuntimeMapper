@@ -27,18 +27,38 @@ public class RuntimeMapper {
     
     private let intType = String(describing: Int.self)
     private let optionalIntType = String(describing: Int?.self)
+    private let arrayIntType = String(describing: [Int].self)
+    private let arrayOptionalIntType = String(describing: [Int?].self)
+    private let optionalArrayIntType = String(describing: [Int]?.self)
+    private let optionalArrayOptionalIntType = String(describing: [Int?]?.self)
     
     private let floatType = String(describing: Float.self)
     private let optionalFloatType = String(describing: Float?.self)
+    private let arrayFloatType = String(describing: [Float].self)
+    private let arrayOptionalFloatType = String(describing: [Float?].self)
+    private let optionalArrayFloatType = String(describing: [Float]?.self)
+    private let optionalArrayOptionalFloatType = String(describing: [Float?]?.self)
     
     private let doubleType = String(describing: Double.self)
     private let optionalDoubleType = String(describing: Double?.self)
+    private let arrayDoubleType = String(describing: [Double].self)
+    private let arrayOptionalDoubleType = String(describing: [Double?].self)
+    private let optionalArrayDoubleType = String(describing: [Double]?.self)
+    private let optionalArrayOptionalDoubleType = String(describing: [Double?]?.self)
     
     private let boolType = String(describing: Bool.self)
     private let optionalBoolType = String(describing: Bool?.self)
+    private let arrayBoolType = String(describing: [Bool].self)
+    private let arrayOptionalBoolType = String(describing: [Bool?].self)
+    private let optionalArrayBoolType = String(describing: [Bool]?.self)
+    private let optionalArrayOptionalBoolType = String(describing: [Bool?]?.self)
     
     private let stringType = String(describing: String.self)
     private let optionalStringType = String(describing: String?.self)
+    private let arrayStringType = String(describing: [String].self)
+    private let arrayOptionalStringType = String(describing: [String?].self)
+    private let optionalArrayStringType = String(describing: [String]?.self)
+    private let optionalArrayOptionalStringType = String(describing: [String?]?.self)
     
     private func findParseInfo(by key: String) -> ParseInfo? {
         return parseInfos.first(where: { $0.key == key })
@@ -120,25 +140,53 @@ extension RuntimeMapper {
     private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
         do {
             switch String(describing: propertyInfo.type) {
+            // Int
             case intType, optionalIntType:
                 if let intValue = value as? Int {
                     try propertyInfo.set(value: intValue, on: &instance)
                 }
+            case arrayIntType, arrayOptionalIntType, optionalArrayIntType, optionalArrayOptionalIntType:
+                if let intArrayValue = value as? [Int] {
+                    try propertyInfo.set(value: intArrayValue, on: &instance)
+                }
+            // Float
             case floatType, optionalFloatType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.floatValue, on: &instance)
                 }
+            case arrayFloatType, arrayOptionalFloatType, optionalArrayFloatType, optionalArrayOptionalFloatType:
+                if let numberArrayValue = value as? [NSNumber] {
+                    let floatArray = numberArrayValue.map { $0.floatValue }
+                    try propertyInfo.set(value: floatArray, on: &instance)
+                }
+            // Double
             case doubleType, optionalDoubleType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.doubleValue, on: &instance)
                 }
+            case arrayDoubleType, arrayOptionalDoubleType, optionalArrayDoubleType, optionalArrayOptionalDoubleType:
+                if let numberArrayValue = value as? [NSNumber] {
+                    let floatArray = numberArrayValue.map { $0.doubleValue }
+                    try propertyInfo.set(value: floatArray, on: &instance)
+                }
+            // Bool
             case boolType, optionalBoolType:
                 if let numberValue = value as? NSNumber {
                     try propertyInfo.set(value: numberValue.boolValue, on: &instance)
                 }
+            case arrayBoolType, arrayOptionalBoolType, optionalArrayBoolType, optionalArrayOptionalBoolType:
+                if let numberArrayValue = value as? [NSNumber] {
+                    let boolArray = numberArrayValue.map { $0.boolValue }
+                    try propertyInfo.set(value: boolArray, on: &instance)
+                }
+            // String
             case stringType, optionalStringType:
                 if let stringValue = value as? String {
                     try propertyInfo.set(value: stringValue, on: &instance)
+                }
+            case arrayStringType, arrayOptionalStringType, optionalArrayStringType, optionalArrayOptionalStringType:
+                if let stringArray = value as? [String] {
+                    try propertyInfo.set(value: stringArray, on: &instance)
                 }
             default:
                 guard

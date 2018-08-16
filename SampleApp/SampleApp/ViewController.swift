@@ -24,6 +24,7 @@ class Blog {
     var value: Float = 0
     var isSecret: Bool = true
     var doubleValue: Double = 0
+    var userIds: [String?] = []
 }
 
 class ViewController: UIViewController {
@@ -39,6 +40,7 @@ class ViewController: UIViewController {
             "name": "Roadfire Software Blog",
             "value": 1231.11,
             "doubleValue": 123213.12322,
+            "userIds": ["1", "2", "3", "4", "5"],
             "isSecret": false
         },
         "blogArray": [{
@@ -103,6 +105,9 @@ class ViewController: UIViewController {
             print("age: \(user.age)")
             print("blog name: \(user.blog.name)")
             print("blog id: \(user.blog.id ?? -1)")
+            user.blog.userIds.forEach {
+                print($0)
+            }
             user.blogArray.forEach {
                 print("[array] name: \($0.name)")
             }
