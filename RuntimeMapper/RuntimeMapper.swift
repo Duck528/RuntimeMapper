@@ -18,7 +18,7 @@ public struct ParseInfo {
 
 public enum ParseType {
     case array
-    case single
+    case object
 }
 
 public class RuntimeMapper {
@@ -60,6 +60,17 @@ public class RuntimeMapper {
     private let optionalArrayStringType = String(describing: [String]?.self)
     private let optionalArrayOptionalStringType = String(describing: [String?]?.self)
     
+    private let numberType = String(describing: NSNumber.self)
+    private let optionalNumberType = String(describing: NSNumber?.self)
+    private let arrayNumberType = String(describing: [NSNumber].self)
+    private let arrayOptionalNumberType = String(describing: [NSNumber?].self)
+    private let optionalArrayNumberType = String(describing: [NSNumber]?.self)
+    private let optionalArrayOptionalNumberType = String(describing: [NSNumber?]?.self)
+    
+    private enum MappingType {
+        case json, instance
+    }
+    
     private func findParseInfo(by key: String) -> ParseInfo? {
         return parseInfos.first(where: { $0.key == key })
     }
@@ -68,7 +79,51 @@ public class RuntimeMapper {
         parseInfos.append(ParseInfo(key: key, classType: classType, parseType: parseType))
     }
     
-    public func readSingle<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
+    public func readObject<F, T>(from instance: F, initializer: (() -> T)) throws -> T {
+        guard let toInfo = try? typeInfo(of: T.self) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        
+        let mappedDict = InstanceHelper.convertToDictionary(from: instance)
+        var toInstance = initializer()
+        
+        for toProperty in toInfo.properties {
+            if let value = mappedDict[toProperty.name] {
+                do {
+                    try setValue(value, to: toProperty, in: &toInstance, mappingType: .instance)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        return toInstance
+    }
+    
+    public func readArray<F, T>(from instances: [F], initializer: (() -> T)) throws -> [T] {
+        guard let toInfo = try? typeInfo(of: T.self) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        
+        let mappedDicts = InstanceHelper.convertToDictionaries(from: instances)
+        var instanceList: [T] = []
+        
+        for mappedDict in mappedDicts {
+            var inst = initializer()
+            for toProperty in toInfo.properties {
+                if let value = mappedDict[toProperty.name] {
+                    do {
+                        try setValue(value, to: toProperty, in: &inst, mappingType: .instance)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            instanceList.append(inst)
+        }
+        return instanceList
+    }
+    
+    public func readObject<T>(from jsonString: String, initializer: (() -> T)) throws -> T {
         guard let info = try? typeInfo(of: T.self) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
@@ -80,7 +135,7 @@ public class RuntimeMapper {
         for p in info.properties {
             if let value = mappedDict[p.name] {
                 do {
-                    try setValue(value, to: p, in: &instance)
+                    try setValue(value, to: p, in: &instance, mappingType: .json)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -102,7 +157,7 @@ public class RuntimeMapper {
             for p in info.properties {
                 if let value = mappedDict[p.name] {
                     do {
-                        try setValue(value, to: p, in: &instance)
+                        try setValue(value, to: p, in: &instance, mappingType: .json)
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -120,7 +175,7 @@ extension RuntimeMapper {
     
     private func convertToJson(from value: Any, type: ParseType) -> String? {
         switch type {
-        case .single:
+        case .object:
             guard
                 let dict = value as? [String: Any],
                 let jsonString = JsonHelper.convertToJsonString(from: dict) else {
@@ -137,7 +192,7 @@ extension RuntimeMapper {
         }
     }
     
-    private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T) throws {
+    private func setValue<T>(_ value: Any, to propertyInfo: PropertyInfo, in instance: inout T, mappingType: MappingType) throws {
         do {
             switch String(describing: propertyInfo.type) {
             // Int
@@ -188,21 +243,64 @@ extension RuntimeMapper {
                 if let stringArray = value as? [String] {
                     try propertyInfo.set(value: stringArray, on: &instance)
                 }
+            // NSNumber
+            case numberType, optionalNumberType:
+                if let numberValue = value as? NSNumber {
+                    try propertyInfo.set(value: numberValue, on: &instance)
+                }
+            case arrayNumberType, arrayOptionalNumberType, optionalArrayNumberType, optionalArrayOptionalNumberType:
+                if let numberArray = value as? [NSNumber] {
+                    try propertyInfo.set(value: numberArray, on: &instance)
+                }
+            // Besides default value
             default:
-                guard
-                    let findedParseInfo = findParseInfo(by: propertyInfo.name),
-                    let jsonString = convertToJson(from: value, type: findedParseInfo.parseType) else {
-                        return
+                guard let findedParseInfo = findParseInfo(by: propertyInfo.name) else {
+                    return
                 }
                 
-                switch findedParseInfo.parseType {
-                case .array:
-                    let array = try readArray(from: jsonString, with: findedParseInfo.classType)
-                    try propertyInfo.set(value: array, on: &instance)
-                case .single:
-                    let object = try readSingle(from: jsonString, with: findedParseInfo.classType)
-                    try propertyInfo.set(value: object, on: &instance)
+                switch mappingType {
+                case .instance:
+                    try setInstanceValue(from: value, to: propertyInfo, with: findedParseInfo, in: &instance)
+                case .json:
+                    try setJsonValue(from: value, to: propertyInfo, with: findedParseInfo, in: &instance)
                 }
+            }
+        } catch {
+            throw error
+        }
+    }
+    
+    private func setJsonValue<T>(from jsonValue: Any, to propertyInfo: PropertyInfo, with parseInfo: ParseInfo, in instance: inout T) throws {
+        guard let jsonString = convertToJson(from: jsonValue, type: parseInfo.parseType) else {
+            return
+        }
+        
+        do {
+            switch parseInfo.parseType {
+            case .object:
+                let object = try readObject(from: jsonString, with: parseInfo.classType)
+                try propertyInfo.set(value: object, on: &instance)
+            case .array:
+                let array = try readArray(from: jsonString, with: parseInfo.classType)
+                try propertyInfo.set(value: array, on: &instance)
+            }
+        } catch {
+            throw error
+        }
+    }
+    
+    private func setInstanceValue<F, T>(from object: F, to propertyInfo: PropertyInfo, with parseInfo: ParseInfo, in instance: inout T) throws {
+        do {
+            switch parseInfo.parseType {
+            case .object:
+                let object = try readObject(from: object, with: parseInfo.classType)
+                try propertyInfo.set(value: object, on: &instance)
+            case .array:
+                guard let objectList = object as? [F] else {
+                    throw RuntimeMapperErrors.UnsupportedType
+                }
+                let array = try readArray(from: objectList, with: parseInfo.classType)
+                try propertyInfo.set(value: array, on: &instance)
             }
         } catch {
             throw error
@@ -211,7 +309,53 @@ extension RuntimeMapper {
 }
 
 extension RuntimeMapper {
-    private func readSingle(from jsonString: String, with type: Any.Type) throws -> Any {
+    private func readObject<F>(from instance: F, with type: Any.Type) throws -> Any {
+        guard let toInfo = try? typeInfo(of: F.self), var instance = try? createInstance(of: type) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        
+        let mappedDict = InstanceHelper.convertToDictionary(from: instance)
+        for toProperty in toInfo.properties {
+            if let value = mappedDict[toProperty.name] {
+                do {
+                    try setValue(value, to: toProperty, in: &instance, mappingType: .instance)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        return instance
+    }
+    
+    public func readArray<F>(from instances: [F], with type: Any.Type) throws -> [Any] {
+        guard let toInfo = try? typeInfo(of: F.self) else {
+            throw RuntimeMapperErrors.UnsupportedType
+        }
+        
+        let mappedDicts = InstanceHelper.convertToDictionaries(from: instances)
+        var instanceList: [Any] = []
+        
+        for mappedDict in mappedDicts {
+            guard var instance = try? createInstance(of: type) else {
+                break
+            }
+            for toProperty in toInfo.properties {
+                if let value = mappedDict[toProperty.name] {
+                    do {
+                        try setValue(value, to: toProperty, in: &instance, mappingType: .instance)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            instanceList.append(instance)
+        }
+        return instanceList
+    }
+}
+
+extension RuntimeMapper {
+    private func readObject(from jsonString: String, with type: Any.Type) throws -> Any {
         guard let info = try? typeInfo(of: type.self), var instance = try? createInstance(of: type) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
@@ -222,7 +366,7 @@ extension RuntimeMapper {
         for p in info.properties {
             if let value = mappedDict[p.name] {
                 do {
-                    try setValue(value, to: p, in: &instance)
+                    try setValue(value, to: p, in: &instance, mappingType: .json)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -246,7 +390,7 @@ extension RuntimeMapper {
             for p in info.properties {
                 if let value = mappedDict[p.name] {
                     do {
-                        try setValue(value, to: p, in: &instance)
+                        try setValue(value, to: p, in: &instance, mappingType: .json)
                     } catch {
                         print(error.localizedDescription)
                     }

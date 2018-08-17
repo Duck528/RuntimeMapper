@@ -16,9 +16,9 @@ class InstanceHelper {
         case ParseInstanceError
     }
     
-    static func convertToDictionary<T>(from instance: T) throws -> [String: Any] {
+    static func convertToDictionary<T>(from instance: T) -> [String: Any] {
         guard let typeInfo = try? typeInfo(of: T.self) else {
-            throw Errors.ParseInstanceError
+            return [:]
         }
         var dict: [String: Any] = [:]
         for property in typeInfo.properties {
@@ -29,9 +29,9 @@ class InstanceHelper {
         return dict
     }
     
-    static func convertToDictionaries<T>(from instances: [T]) throws -> [[String: Any]] {
+    static func convertToDictionaries<T>(from instances: [T]) -> [[String: Any]] {
         guard let typeInfo = try? typeInfo(of: T.self) else {
-            throw Errors.ParseInstanceError
+            return []
         }
         var dicts: [[String: Any]] = [[:]]
         for inst in instances {
