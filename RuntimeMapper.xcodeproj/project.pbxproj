@@ -15,6 +15,7 @@
 		FC74B7A42108C97900F9CA78 /* RuntimeMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC74B7962108C97900F9CA78 /* RuntimeMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B2082108D49A0070F895 /* RuntimeMapper.swift */; };
 		FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */; };
+		FCDABDDF2126B30C00803A93 /* InstanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDABDDE2126B30C00803A93 /* InstanceHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		FC74B7A32108C97900F9CA78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC75B2082108D49A0070F895 /* RuntimeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapper.swift; sourceTree = "<group>"; };
 		FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapperErrors.swift; sourceTree = "<group>"; };
+		FCDABDDE2126B30C00803A93 /* InstanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				FC62AB22210E36AC001686E6 /* JsonHelper.swift */,
+				FCDABDDE2126B30C00803A93 /* InstanceHelper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCDABDDF2126B30C00803A93 /* InstanceHelper.swift in Sources */,
 				FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */,
 				FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */,
 				FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */,
