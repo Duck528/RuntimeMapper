@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1149B55E369684348A77CB7A /* Pods_RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DEE555F576413EA9F4E5CC7 /* Pods_RuntimeMapper.framework */; };
-		9E07CAA696E5669D377988D3 /* Pods_RuntimeMapperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9C7B857B5E78380F43AC00 /* Pods_RuntimeMapperTests.framework */; };
+		6F5B1FDD0E9439C230556C56 /* Pods_RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3183E7DDE2B798B0ECEB2889 /* Pods_RuntimeMapper.framework */; };
+		814E684BC96481259061E0D1 /* Pods_RuntimeMapperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F902009C95EBD9C1DFCCB038 /* Pods_RuntimeMapperTests.framework */; };
 		FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62AB22210E36AC001686E6 /* JsonHelper.swift */; };
 		FC74B79D2108C97900F9CA78 /* RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */; };
 		FC74B7A22108C97900F9CA78 /* RuntimeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */; };
 		FC74B7A42108C97900F9CA78 /* RuntimeMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC74B7962108C97900F9CA78 /* RuntimeMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B2082108D49A0070F895 /* RuntimeMapper.swift */; };
 		FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */; };
+		FCDABDDF2126B30C00803A93 /* InstanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDABDDE2126B30C00803A93 /* InstanceHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,12 +29,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5DEE555F576413EA9F4E5CC7 /* Pods_RuntimeMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RuntimeMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5405EF738839121B911AEE1 /* Pods-RuntimeMapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapper/Pods-RuntimeMapper.debug.xcconfig"; sourceTree = "<group>"; };
-		BA9C7B857B5E78380F43AC00 /* Pods_RuntimeMapperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RuntimeMapperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E038A32A192876F0C7E797D6 /* Pods-RuntimeMapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapper/Pods-RuntimeMapper.release.xcconfig"; sourceTree = "<group>"; };
-		E6194ADB7976BC7AE0C62572 /* Pods-RuntimeMapperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.release.xcconfig"; sourceTree = "<group>"; };
-		F879BACEC1F02DAE7BC2FAC2 /* Pods-RuntimeMapperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		248BE8802B3179053D007480 /* Pods-RuntimeMapperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3183E7DDE2B798B0ECEB2889 /* Pods_RuntimeMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RuntimeMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41F298FD3ADDD514D42B0E4D /* Pods-RuntimeMapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapper/Pods-RuntimeMapper.debug.xcconfig"; sourceTree = "<group>"; };
+		493A3D8063BCF52554DFC866 /* Pods-RuntimeMapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapper.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapper/Pods-RuntimeMapper.release.xcconfig"; sourceTree = "<group>"; };
+		5D3AC66453368F515BBA6CD4 /* Pods-RuntimeMapperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.release.xcconfig"; sourceTree = "<group>"; };
+		F902009C95EBD9C1DFCCB038 /* Pods_RuntimeMapperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RuntimeMapperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC62AB22210E36AC001686E6 /* JsonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
 		FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RuntimeMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC74B7962108C97900F9CA78 /* RuntimeMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RuntimeMapper.h; sourceTree = "<group>"; };
@@ -43,6 +44,7 @@
 		FC74B7A32108C97900F9CA78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC75B2082108D49A0070F895 /* RuntimeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapper.swift; sourceTree = "<group>"; };
 		FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeMapperErrors.swift; sourceTree = "<group>"; };
+		FCDABDDE2126B30C00803A93 /* InstanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1149B55E369684348A77CB7A /* Pods_RuntimeMapper.framework in Frameworks */,
+				6F5B1FDD0E9439C230556C56 /* Pods_RuntimeMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,37 +61,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC74B79D2108C97900F9CA78 /* RuntimeMapper.framework in Frameworks */,
-				9E07CAA696E5669D377988D3 /* Pods_RuntimeMapperTests.framework in Frameworks */,
+				814E684BC96481259061E0D1 /* Pods_RuntimeMapperTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		54BA22B2A372D61CE634D1E7 /* Frameworks */ = {
+		198335878074584FC78629DD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5DEE555F576413EA9F4E5CC7 /* Pods_RuntimeMapper.framework */,
-				BA9C7B857B5E78380F43AC00 /* Pods_RuntimeMapperTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DEAC2F1BFC22E14A320EBF0B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B5405EF738839121B911AEE1 /* Pods-RuntimeMapper.debug.xcconfig */,
-				E038A32A192876F0C7E797D6 /* Pods-RuntimeMapper.release.xcconfig */,
-				F879BACEC1F02DAE7BC2FAC2 /* Pods-RuntimeMapperTests.debug.xcconfig */,
-				E6194ADB7976BC7AE0C62572 /* Pods-RuntimeMapperTests.release.xcconfig */,
+				41F298FD3ADDD514D42B0E4D /* Pods-RuntimeMapper.debug.xcconfig */,
+				493A3D8063BCF52554DFC866 /* Pods-RuntimeMapper.release.xcconfig */,
+				248BE8802B3179053D007480 /* Pods-RuntimeMapperTests.debug.xcconfig */,
+				5D3AC66453368F515BBA6CD4 /* Pods-RuntimeMapperTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C5C9E7D83A801854FF0FE14C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3183E7DDE2B798B0ECEB2889 /* Pods_RuntimeMapper.framework */,
+				F902009C95EBD9C1DFCCB038 /* Pods_RuntimeMapperTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FC62AB21210E369F001686E6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				FC62AB22210E36AC001686E6 /* JsonHelper.swift */,
+				FCDABDDE2126B30C00803A93 /* InstanceHelper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -100,8 +103,8 @@
 				FC74B7952108C97900F9CA78 /* RuntimeMapper */,
 				FC74B7A02108C97900F9CA78 /* RuntimeMapperTests */,
 				FC74B7942108C97900F9CA78 /* Products */,
-				DEAC2F1BFC22E14A320EBF0B /* Pods */,
-				54BA22B2A372D61CE634D1E7 /* Frameworks */,
+				198335878074584FC78629DD /* Pods */,
+				C5C9E7D83A801854FF0FE14C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,7 +156,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC74B7A72108C97900F9CA78 /* Build configuration list for PBXNativeTarget "RuntimeMapper" */;
 			buildPhases = (
-				E8F43AE54742A90ABA14DDAC /* [CP] Check Pods Manifest.lock */,
+				325CED87CF24984ED40555A5 /* [CP] Check Pods Manifest.lock */,
 				FC74B78E2108C97900F9CA78 /* Sources */,
 				FC74B78F2108C97900F9CA78 /* Frameworks */,
 				FC74B7902108C97900F9CA78 /* Headers */,
@@ -172,11 +175,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC74B7AA2108C97900F9CA78 /* Build configuration list for PBXNativeTarget "RuntimeMapperTests" */;
 			buildPhases = (
-				F366986F963451120CDB88D7 /* [CP] Check Pods Manifest.lock */,
+				E98C83245E3921AA9A947CFB /* [CP] Check Pods Manifest.lock */,
 				FC74B7982108C97900F9CA78 /* Sources */,
 				FC74B7992108C97900F9CA78 /* Frameworks */,
 				FC74B79A2108C97900F9CA78 /* Resources */,
-				DF9A745AAC1904D09CED1ADB /* [CP] Embed Pods Frameworks */,
+				BEE2D2B13F46F6DF7E62B0E7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,25 +246,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DF9A745AAC1904D09CED1ADB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Runtime/Runtime.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Runtime.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E8F43AE54742A90ABA14DDAC /* [CP] Check Pods Manifest.lock */ = {
+		325CED87CF24984ED40555A5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -279,7 +264,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F366986F963451120CDB88D7 /* [CP] Check Pods Manifest.lock */ = {
+		BEE2D2B13F46F6DF7E62B0E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Runtime/Runtime.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Runtime.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E98C83245E3921AA9A947CFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCDABDDF2126B30C00803A93 /* InstanceHelper.swift in Sources */,
 				FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */,
 				FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */,
 				FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */,
@@ -367,6 +371,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -451,7 +456,7 @@
 		};
 		FC74B7A82108C97900F9CA78 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5405EF738839121B911AEE1 /* Pods-RuntimeMapper.debug.xcconfig */;
+			baseConfigurationReference = 41F298FD3ADDD514D42B0E4D /* Pods-RuntimeMapper.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -479,7 +484,7 @@
 		};
 		FC74B7A92108C97900F9CA78 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E038A32A192876F0C7E797D6 /* Pods-RuntimeMapper.release.xcconfig */;
+			baseConfigurationReference = 493A3D8063BCF52554DFC866 /* Pods-RuntimeMapper.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -506,7 +511,7 @@
 		};
 		FC74B7AB2108C97900F9CA78 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F879BACEC1F02DAE7BC2FAC2 /* Pods-RuntimeMapperTests.debug.xcconfig */;
+			baseConfigurationReference = 248BE8802B3179053D007480 /* Pods-RuntimeMapperTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -526,7 +531,7 @@
 		};
 		FC74B7AC2108C97900F9CA78 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6194ADB7976BC7AE0C62572 /* Pods-RuntimeMapperTests.release.xcconfig */;
+			baseConfigurationReference = 5D3AC66453368F515BBA6CD4 /* Pods-RuntimeMapperTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
