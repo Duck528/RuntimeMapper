@@ -85,8 +85,10 @@ class JsonMappingTests: XCTestCase {
 //        runtimeMapper.register(key: "blog", classType: Blog.self, parseType: .object)
 //        runtimeMapper.register(key: "blogArray", classType: Blog.self, parseType: .array)
 //
-        let runtimeMapper = RuntimeMapperBuilder()
-            .setParseInfo(key: "blog", fromType: Blog.self, toType: <#T##Any.Type#>, parseType: <#T##ParseType#>)
+        let runtimeMapper = RuntimeJsonMapperBuilder()
+            .setParseInfo(key: "blog", toType: Blog.self, parseType: .object)
+            .setParseInfo(key: "blogArray", toType: Blog.self, parseType: .array)
+            .build()
         
         // when
         let user = try? runtimeMapper.readObject(from: jsonNestedString, initializer: User.init)

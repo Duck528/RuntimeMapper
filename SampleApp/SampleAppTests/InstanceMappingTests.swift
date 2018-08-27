@@ -18,7 +18,7 @@ class InstanceMappingTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        runtimeMapper = RuntimeMapperBuilder()
+        runtimeMapper = RuntimeInstanceMapperBuilder()
             .setParseInfo(key: "blog", fromType: Blog.self, toType: Blog.self, parseType: .object)
             .setParseInfo(key: "blogArray", fromType: Blog.self, toType: Blog.self, parseType: .array)
             .build()
