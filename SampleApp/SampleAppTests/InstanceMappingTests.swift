@@ -20,7 +20,6 @@ class InstanceMappingTests: XCTestCase {
         
         runtimeMapper = RuntimeInstanceMapperBuilder()
             .setParseInfo(key: "blog", fromType: Blog.self, toType: Blog.self, parseType: .object)
-            .setParseInfo(key: "blogArray", fromType: Blog.self, toType: Blog.self, parseType: .array)
             .build()
     }
     

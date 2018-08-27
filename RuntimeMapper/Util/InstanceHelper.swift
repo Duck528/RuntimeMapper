@@ -16,6 +16,21 @@ class InstanceHelper {
         case ParseInstanceError
     }
     
+    static func convertToDictionary<T>(from instance: T, instanceType: Any.Type) -> [String: Any] {
+        guard let typeInfo = try? typeInfo(of: instanceType) else {
+            return [:]
+        }
+        print("instance: \(instance), type: \(String(describing: instanceType))")
+        var dict: [String: Any] = [:]
+        for property in typeInfo.properties {
+            print("propertyName: \(property.name)")
+            if let value = try? property.get(from: instance) {
+                dict[property.name] = value
+            }
+        }
+        return dict
+    }
+    
     static func convertToDictionary<T>(from instance: T) -> [String: Any] {
         guard let typeInfo = try? typeInfo(of: T.self) else {
             return [:]
@@ -31,6 +46,23 @@ class InstanceHelper {
     
     static func convertToDictionaries<T>(from instances: [T]) -> [[String: Any]] {
         guard let typeInfo = try? typeInfo(of: T.self) else {
+            return []
+        }
+        var dicts: [[String: Any]] = [[:]]
+        for inst in instances {
+            var dict: [String: Any] = [:]
+            for property in typeInfo.properties {
+                if let value = try? property.get(from: inst) {
+                    dict[property.name] = value
+                }
+            }
+            dicts.append(dict)
+        }
+        return dicts
+    }
+    
+    static func convertToDictionaries<T>(from instances: [T], instanceType: Any.Type) -> [[String: Any]] {
+        guard let typeInfo = try? typeInfo(of: instanceType) else {
             return []
         }
         var dicts: [[String: Any]] = [[:]]

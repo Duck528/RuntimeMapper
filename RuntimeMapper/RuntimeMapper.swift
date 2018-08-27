@@ -312,15 +312,15 @@ extension RuntimeMapper {
 
 extension RuntimeMapper {
     private func readObject<F>(from instance: F, fromType: Any.Type, toType: Any.Type) throws -> Any {
-        guard let toInfo = try? typeInfo(of: fromType), var instance = try? createInstance(of: toType) else {
+        guard let fromInfo = try? typeInfo(of: fromType), var toInstance = try? createInstance(of: toType) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
-        
-        let mappedDict = InstanceHelper.convertToDictionary(from: instance)
-        for toProperty in toInfo.properties {
-            if let value = mappedDict[toProperty.name] {
+        print("type: \(type(of: instance)), value: \(instance)")
+        let mappedDict = InstanceHelper.convertToDictionary(from: instance, instanceType: fromType)
+        for fromProperty in fromInfo.properties {
+            if let value = mappedDict[fromProperty.name] {
                 do {
-                    try setValue(value, to: toProperty, in: &instance, mappingType: .instance)
+                    try setValue(value, to: fromProperty, in: &toInstance, mappingType: .instance)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -334,7 +334,7 @@ extension RuntimeMapper {
             throw RuntimeMapperErrors.UnsupportedType
         }
         
-        let mappedDicts = InstanceHelper.convertToDictionaries(from: instances)
+        let mappedDicts = InstanceHelper.convertToDictionaries(from: instances, instanceType: toType)
         var instanceList: [Any] = []
         
         for mappedDict in mappedDicts {
