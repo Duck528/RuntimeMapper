@@ -10,6 +10,7 @@
 		6F5B1FDD0E9439C230556C56 /* Pods_RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3183E7DDE2B798B0ECEB2889 /* Pods_RuntimeMapper.framework */; };
 		814E684BC96481259061E0D1 /* Pods_RuntimeMapperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F902009C95EBD9C1DFCCB038 /* Pods_RuntimeMapperTests.framework */; };
 		FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62AB22210E36AC001686E6 /* JsonHelper.swift */; };
+		FC6985FC2134557000BE8FD4 /* ValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6985FB2134557000BE8FD4 /* ValueType.swift */; };
 		FC74B79D2108C97900F9CA78 /* RuntimeMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */; };
 		FC74B7A22108C97900F9CA78 /* RuntimeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74B7A12108C97900F9CA78 /* RuntimeMapperTests.swift */; };
 		FC74B7A42108C97900F9CA78 /* RuntimeMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC74B7962108C97900F9CA78 /* RuntimeMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +37,7 @@
 		5D3AC66453368F515BBA6CD4 /* Pods-RuntimeMapperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RuntimeMapperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RuntimeMapperTests/Pods-RuntimeMapperTests.release.xcconfig"; sourceTree = "<group>"; };
 		F902009C95EBD9C1DFCCB038 /* Pods_RuntimeMapperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RuntimeMapperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC62AB22210E36AC001686E6 /* JsonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
+		FC6985FB2134557000BE8FD4 /* ValueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueType.swift; sourceTree = "<group>"; };
 		FC74B7932108C97900F9CA78 /* RuntimeMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RuntimeMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC74B7962108C97900F9CA78 /* RuntimeMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RuntimeMapper.h; sourceTree = "<group>"; };
 		FC74B7972108C97900F9CA78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				FC75B20A2108DB1F0070F895 /* RuntimeMapperErrors.swift */,
 				FC75B2082108D49A0070F895 /* RuntimeMapper.swift */,
 				FC74B7972108C97900F9CA78 /* Info.plist */,
+				FC6985FB2134557000BE8FD4 /* ValueType.swift */,
 			);
 			path = RuntimeMapper;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				FCDABDDF2126B30C00803A93 /* InstanceHelper.swift in Sources */,
 				FC62AB23210E36AC001686E6 /* JsonHelper.swift in Sources */,
+				FC6985FC2134557000BE8FD4 /* ValueType.swift in Sources */,
 				FC75B20B2108DB1F0070F895 /* RuntimeMapperErrors.swift in Sources */,
 				FC75B2092108D49A0070F895 /* RuntimeMapper.swift in Sources */,
 			);
