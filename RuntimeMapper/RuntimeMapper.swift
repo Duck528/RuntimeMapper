@@ -12,7 +12,8 @@ import Runtime
 
 public struct ParseInfo {
     let key: String
-    let classType: Any.Type
+    let fromType: Any.Type
+    let toType: Any.Type
     let parseType: ParseType
 }
 
@@ -22,19 +23,20 @@ public enum ParseType {
 }
 
 public class RuntimeMapper {
-    
     private var parseInfos: [ParseInfo] = []
     
     private enum MappingType {
         case json, instance
     }
     
-    private func findParseInfo(by key: String) -> ParseInfo? {
-        return parseInfos.first(where: { $0.key == key })
+    public init() { }
+    
+    public init(parseInfos: [ParseInfo]) {
+        self.parseInfos = parseInfos
     }
     
-    public func register(key: String, classType: Any.Type, parseType: ParseType) {
-        parseInfos.append(ParseInfo(key: key, classType: classType, parseType: parseType))
+    private func findParseInfo(by key: String) -> ParseInfo? {
+        return parseInfos.first(where: { $0.key == key })
     }
     
     public func readObject<F, T>(from instance: F, initializer: (() -> T)) throws -> T {
@@ -125,8 +127,6 @@ public class RuntimeMapper {
         }
         return instanceList
     }
-    
-    public init() { }
 }
 
 extension RuntimeMapper {
@@ -263,10 +263,10 @@ extension RuntimeMapper {
         do {
             switch parseInfo.parseType {
             case .object:
-                let object = try readObject(from: jsonString, with: parseInfo.classType)
+                let object = try readObject(from: jsonString, with: parseInfo.toType)
                 try propertyInfo.set(value: object, on: &instance)
             case .array:
-                let array = try readArray(from: jsonString, with: parseInfo.classType)
+                let array = try readArray(from: jsonString, with: parseInfo.toType)
                 try propertyInfo.set(value: array, on: &instance)
             }
         } catch {
@@ -278,13 +278,13 @@ extension RuntimeMapper {
         do {
             switch parseInfo.parseType {
             case .object:
-                let object = try readObject(from: object, with: parseInfo.classType)
+                let object = try readObject(from: object, fromType: parseInfo.fromType, toType: parseInfo.toType)
                 try propertyInfo.set(value: object, on: &instance)
             case .array:
                 guard let objectList = object as? [F] else {
                     throw RuntimeMapperErrors.UnsupportedType
                 }
-                let array = try readArray(from: objectList, with: parseInfo.classType)
+                let array = try readArray(from: objectList, fromType: parseInfo.fromType, toType: parseInfo.toType)
                 try propertyInfo.set(value: array, on: &instance)
             }
         } catch {
@@ -294,8 +294,8 @@ extension RuntimeMapper {
 }
 
 extension RuntimeMapper {
-    private func readObject<F>(from instance: F, with type: Any.Type) throws -> Any {
-        guard let toInfo = try? typeInfo(of: F.self), var instance = try? createInstance(of: type) else {
+    private func readObject<F>(from instance: F, fromType: Any.Type, toType: Any.Type) throws -> Any {
+        guard let toInfo = try? typeInfo(of: fromType), var instance = try? createInstance(of: toType) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
         
@@ -312,8 +312,8 @@ extension RuntimeMapper {
         return instance
     }
     
-    public func readArray<F>(from instances: [F], with type: Any.Type) throws -> [Any] {
-        guard let toInfo = try? typeInfo(of: F.self) else {
+    public func readArray<F>(from instances: [F], fromType: Any.Type, toType: Any.Type) throws -> [Any] {
+        guard let toInfo = try? typeInfo(of: fromType) else {
             throw RuntimeMapperErrors.UnsupportedType
         }
         
@@ -321,7 +321,7 @@ extension RuntimeMapper {
         var instanceList: [Any] = []
         
         for mappedDict in mappedDicts {
-            guard var instance = try? createInstance(of: type) else {
+            guard var instance = try? createInstance(of: toType) else {
                 break
             }
             for toProperty in toInfo.properties {
