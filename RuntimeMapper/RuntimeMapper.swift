@@ -10,11 +10,17 @@ import Foundation
 import Runtime
 
 
-public struct ParseInfo {
-    let key: String
-    let fromType: Any.Type
-    let toType: Any.Type
-    let parseType: ParseType
+public struct InstanceParseInfo {
+    public let key: String
+    public let fromType: Any.Type
+    public let toType: Any.Type
+    public let parseType: ParseType
+}
+
+public struct JsonParseInfo {
+    public let key: String
+    public let toType: Any.Type
+    public let parseType: ParseType
 }
 
 public enum ParseType {
@@ -23,7 +29,8 @@ public enum ParseType {
 }
 
 public class RuntimeMapper {
-    private var parseInfos: [ParseInfo] = []
+    private var jsonParseInfos: [JsonParseInfo] = []
+    private var instanceParseInfos: [InstanceParseInfo] = []
     
     private enum MappingType {
         case json, instance
@@ -31,12 +38,20 @@ public class RuntimeMapper {
     
     public init() { }
     
-    public init(parseInfos: [ParseInfo]) {
-        self.parseInfos = parseInfos
+    public init(jsonParseInfos: [JsonParseInfo]) {
+        self.jsonParseInfos = jsonParseInfos
     }
     
-    private func findParseInfo(by key: String) -> ParseInfo? {
-        return parseInfos.first(where: { $0.key == key })
+    public init(instanceParseInfos: [InstanceParseInfo]) {
+        self.instanceParseInfos = instanceParseInfos
+    }
+    
+    private func findJsonParseInfo(by key: String) -> JsonParseInfo? {
+        return jsonParseInfos.first(where: { $0.key == key })
+    }
+    
+    private func findInstanceParseInfo(by key: String) -> InstanceParseInfo? {
+        return instanceParseInfos.first(where: { $0.key == key })
     }
     
     public func readObject<F, T>(from instance: F, initializer: (() -> T)) throws -> T {
@@ -239,15 +254,17 @@ extension RuntimeMapper {
                 }
             // Besides default value
             default:
-                guard let findedParseInfo = findParseInfo(by: propertyInfo.name) else {
-                    return
-                }
-                
                 switch mappingType {
                 case .instance:
-                    try setInstanceValue(from: value, to: propertyInfo, with: findedParseInfo, in: &instance)
+                    guard let instanceParseInfo = findInstanceParseInfo(by: propertyInfo.name) else {
+                        return
+                    }
+                    try setInstanceValue(from: value, to: propertyInfo, with: instanceParseInfo, in: &instance)
                 case .json:
-                    try setJsonValue(from: value, to: propertyInfo, with: findedParseInfo, in: &instance)
+                    guard let jsonParseInfo = findJsonParseInfo(by: propertyInfo.name) else {
+                        return
+                    }
+                    try setJsonValue(from: value, to: propertyInfo, with: jsonParseInfo, in: &instance)
                 }
             }
         } catch {
@@ -255,7 +272,7 @@ extension RuntimeMapper {
         }
     }
     
-    private func setJsonValue<T>(from jsonValue: Any, to propertyInfo: PropertyInfo, with parseInfo: ParseInfo, in instance: inout T) throws {
+    private func setJsonValue<T>(from jsonValue: Any, to propertyInfo: PropertyInfo, with parseInfo: JsonParseInfo, in instance: inout T) throws {
         guard let jsonString = convertToJson(from: jsonValue, type: parseInfo.parseType) else {
             return
         }
@@ -274,7 +291,7 @@ extension RuntimeMapper {
         }
     }
     
-    private func setInstanceValue<F, T>(from object: F, to propertyInfo: PropertyInfo, with parseInfo: ParseInfo, in instance: inout T) throws {
+    private func setInstanceValue<F, T>(from object: F, to propertyInfo: PropertyInfo, with parseInfo: InstanceParseInfo, in instance: inout T) throws {
         do {
             switch parseInfo.parseType {
             case .object:

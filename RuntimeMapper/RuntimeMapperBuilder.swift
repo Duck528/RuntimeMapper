@@ -9,16 +9,5 @@
 import Foundation
 
 
-public class RuntimeMapperBuilder {
-    private var parseInfos: [ParseInfo] = []
-    
-    public func setParseInfo(_ parseInfo: ParseInfo) -> RuntimeMapperBuilder {
-        parseInfos.append(parseInfo)
-        return self
-    }
-    
-    public func build() -> RuntimeMapper {
-        let runtimeMapper = RuntimeMapper(parseInfos: parseInfos)
-        return runtimeMapper
-    }
-}
+
+

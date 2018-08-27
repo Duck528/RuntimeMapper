@@ -13,13 +13,15 @@ import RuntimeMapper
 
 class InstanceMappingTests: XCTestCase {
     
-    let runtimeMapper = RuntimeMapper()
+    var runtimeMapper: RuntimeMapper!
     
     override func setUp() {
         super.setUp()
         
-        runtimeMapper.register(key: "blog", classType: Blog.self, parseType: .object)
-        runtimeMapper.register(key: "blogArray", classType: Blog.self, parseType: .array)
+        runtimeMapper = RuntimeMapperBuilder()
+            .setParseInfo(key: "blog", fromType: Blog.self, toType: Blog.self, parseType: .object)
+            .setParseInfo(key: "blogArray", fromType: Blog.self, toType: Blog.self, parseType: .array)
+            .build()
     }
     
     private func createBlog(name: String, doubleValue: Double, url: String, userIds: [NSNumber], value: Float, id: Int = 20, isSecret: Bool = false) -> Blog {
